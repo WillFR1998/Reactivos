@@ -110,7 +110,7 @@ int intentos = 0;
         Connection conexion = null;
         Conectar conn = new Conectar();
         conn.setV_user("root");
-        conn.setV_password("BuffaloSV503");
+        conn.setV_password("123456");
         conn.setV_server("localhost");
         conn.setV_db("biologia");
         conexion = conn.ConexionDB();
