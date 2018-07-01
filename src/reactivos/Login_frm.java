@@ -14,9 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class Login_frm extends javax.swing.JFrame {
-int intentos = 0;
+
+    int intentos = 0;
+
     /**
      * Creates new form Login_frm
      */
@@ -33,13 +34,13 @@ int intentos = 0;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Title_lbl0 = new javax.swing.JLabel();
         Title_lbl1 = new javax.swing.JLabel();
         Title_lbl2 = new javax.swing.JLabel();
         Title_lbl3 = new javax.swing.JLabel();
         User_txt = new javax.swing.JTextField();
         Login_btn = new javax.swing.JButton();
         Pass_txt = new javax.swing.JPasswordField();
+        Title_lbl0 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -47,8 +48,6 @@ int intentos = 0;
                 formWindowOpened(evt);
             }
         });
-
-        Title_lbl0.setText("Texto de bienvenida");
 
         Title_lbl1.setText("Usuario:");
 
@@ -62,6 +61,8 @@ int intentos = 0;
                 Login_btnMouseClicked(evt);
             }
         });
+
+        Title_lbl0.setText("Texto de bienvenida");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,7 +78,7 @@ int intentos = 0;
                     .addComponent(User_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Pass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Login_btn))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,48 +104,40 @@ int intentos = 0;
     }// </editor-fold>//GEN-END:initComponents
 
     private void Login_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Login_btnMouseClicked
-        if("".equals(this.User_txt.getText())){
+        if ("".equals(this.User_txt.getText())) {
             JOptionPane.showMessageDialog(null, "Por favor introduzca su usuario");
-        }
-        else {
-        Connection conexion = null;
-        Conectar conn = new Conectar();
-        conn.setV_user("root");
-        conn.setV_password("123456");
-        conn.setV_server("localhost");
-        conn.setV_db("biologia");
-        conexion = conn.ConexionDB();
-        String password = "";
-        Statement stmt = null;
-        String queryUser = "SELECT Login_Pass from login_table Where Login_ID_PK = '" + this.User_txt.getText() + "'";
-        try{
-            stmt = conexion.createStatement();
-            ResultSet rs = stmt.executeQuery(queryUser);
-            while(rs.next()){
-                password = rs.getString("Login_Pass");
+        } else {
+            Connection conexion = null;
+            Conectar conn = new Conectar();
+            conexion = conn.ConexionDB();
+            String password = "";
+            Statement stmt = null;
+            String queryUser = "SELECT Login_Pass from login_table Where Login_ID_PK = '" + this.User_txt.getText() + "'";
+            try {
+                stmt = conexion.createStatement();
+                ResultSet rs = stmt.executeQuery(queryUser);
+                while (rs.next()) {
+                    password = rs.getString("Login_Pass");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login_frm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        catch(SQLException ex) {
-            Logger.getLogger(Login_frm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (password.equals(String.valueOf(this.Pass_txt.getPassword()))){
-            JOptionPane.showMessageDialog(null, "Acceso Concedido");
-            Main_frm main = new Main_frm();
-            main.Usuario = this.User_txt.getText();
-            main.setVisible(true);
-            main.setExtendedState(Main_frm.MAXIMIZED_BOTH);
-            this.dispose();         
-        }
-        else {
-            this.Title_lbl3.setText("Acceso Denegado");
-        }
-        
-        if (intentos == 3)
-        {
-            JOptionPane.showMessageDialog(null, "Numero de intentos excedidos");
-            this.dispose();
-        }
-        intentos++;
+            if (password.equals(String.valueOf(this.Pass_txt.getPassword()))) {
+                JOptionPane.showMessageDialog(null, "Acceso Concedido");
+                Main_frm main = new Main_frm();
+                main.Usuario = this.User_txt.getText();
+                main.setVisible(true);
+                main.setLocationRelativeTo(null);
+                this.dispose();
+            } else {
+                this.Title_lbl3.setText("Acceso Denegado");
+            }
+
+            if (intentos == 3) {
+                JOptionPane.showMessageDialog(null, "Numero de intentos excedidos");
+                this.dispose();
+            }
+            intentos++;
         }
     }//GEN-LAST:event_Login_btnMouseClicked
 

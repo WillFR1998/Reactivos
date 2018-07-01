@@ -37,7 +37,7 @@
                   <Component id="Pass_txt" alignment="2" min="-2" pref="153" max="-2" attributes="0"/>
                   <Component id="Login_btn" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="74" max="32767" attributes="0"/>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,11 +64,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="Title_lbl0">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Texto de bienvenida"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="Title_lbl1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Usuario:"/>
@@ -95,6 +90,11 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="Pass_txt">
+    </Component>
+    <Component class="javax.swing.JLabel" name="Title_lbl0">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Texto de bienvenida"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
