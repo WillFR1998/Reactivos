@@ -5,9 +5,22 @@
  */
 package reactivos;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class Main_frm extends javax.swing.JFrame {
 
     public String Usuario = "";
+    private String Seleccionado = "";
+    private int operacion = 0;
+    ButtonGroup Rbtn_group;
     public Main_frm() {
         initComponents();
     }
@@ -23,6 +36,21 @@ public class Main_frm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Title_lbl1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tb_Main = new javax.swing.JTable();
+        Btn_modificar = new javax.swing.JButton();
+        Btn_Eliminar = new javax.swing.JButton();
+        Btn_agregar = new javax.swing.JButton();
+        Btn_filtrar = new javax.swing.JButton();
+        Pnl_1 = new javax.swing.JPanel();
+        Txt_1 = new javax.swing.JTextField();
+        Lbl_nombre = new javax.swing.JLabel();
+        Lbl_disponibilidad = new javax.swing.JLabel();
+        Lbl_Title_opc = new javax.swing.JLabel();
+        Btn_aceptar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        Rbtn_1 = new javax.swing.JRadioButton();
+        Rbtn_2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -35,6 +63,21 @@ public class Main_frm extends javax.swing.JFrame {
 
         Title_lbl1.setText("1");
 
+        Tb_Main.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID de Reactivo", "Nombre", "Disponibilidad", "Usuario"
+            }
+        ));
+        Tb_Main.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tb_MainMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Tb_Main);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -42,13 +85,139 @@ public class Main_frm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Title_lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(459, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(Title_lbl1)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 616, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(67, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+
+        Btn_modificar.setText("Modificar");
+        Btn_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_modificarMouseClicked(evt);
+            }
+        });
+
+        Btn_Eliminar.setText("Eliminar");
+        Btn_Eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_EliminarMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Btn_EliminarMouseExited(evt);
+            }
+        });
+
+        Btn_agregar.setText("Agregar");
+        Btn_agregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_agregarMouseClicked(evt);
+            }
+        });
+
+        Btn_filtrar.setText("Filtrar por ID");
+        Btn_filtrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_filtrarMouseClicked(evt);
+            }
+        });
+
+        Pnl_1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        Txt_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Txt_1ActionPerformed(evt);
+            }
+        });
+
+        Lbl_nombre.setText("Nombre");
+
+        Lbl_disponibilidad.setText("Disponibilidad");
+
+        Lbl_Title_opc.setText("Titulo");
+
+        Btn_aceptar.setText("Aceptar");
+        Btn_aceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_aceptarMouseClicked(evt);
+            }
+        });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        Rbtn_1.setText("Disponible");
+
+        Rbtn_2.setText("No Disponible");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Rbtn_1)
+                .addGap(18, 18, 18)
+                .addComponent(Rbtn_2)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Rbtn_2)
+                    .addComponent(Rbtn_1))
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout Pnl_1Layout = new javax.swing.GroupLayout(Pnl_1);
+        Pnl_1.setLayout(Pnl_1Layout);
+        Pnl_1Layout.setHorizontalGroup(
+            Pnl_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Pnl_1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Pnl_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lbl_disponibilidad)
+                    .addComponent(Lbl_nombre))
+                .addGap(30, 30, 30)
+                .addGroup(Pnl_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(Btn_aceptar)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Txt_1)
+                    .addComponent(Lbl_Title_opc))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+        Pnl_1Layout.setVerticalGroup(
+            Pnl_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Pnl_1Layout.createSequentialGroup()
+                .addComponent(Lbl_Title_opc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Pnl_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lbl_nombre)
+                    .addComponent(Txt_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(Pnl_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Pnl_1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(Lbl_disponibilidad))
+                    .addGroup(Pnl_1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Btn_aceptar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -58,23 +227,270 @@ public class Main_frm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(475, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Btn_agregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Btn_modificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Btn_Eliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Btn_filtrar))
+                    .addComponent(Pnl_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(179, 179, 179))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Btn_agregar)
+                    .addComponent(Btn_modificar)
+                    .addComponent(Btn_Eliminar)
+                    .addComponent(Btn_filtrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Pnl_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.Title_lbl1.setText("Bienvenido: " + Usuario);
+         this.Title_lbl1.setText("Bienvenido: " + Usuario);
+        refrescarTabla();
+        Rbtn_group = new ButtonGroup();
+        Rbtn_group.add(Rbtn_1);
+        Rbtn_group.add(Rbtn_2);
+        this.Btn_aceptar.setEnabled(false);
+        this.Txt_1.setEnabled(false);
+        this.Rbtn_1.setEnabled(false);
+        this.Rbtn_2.setEnabled(false);
     }//GEN-LAST:event_formWindowOpened
 
+    private void Tb_MainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tb_MainMouseClicked
+        int row = Tb_Main.getSelectedRow();
+        Seleccionado = String.valueOf(this.Tb_Main.getValueAt(row, 0));
+        if (operacion == 2) {
+            this.Lbl_Title_opc.setText("Modificar Item: " + Seleccionado);
+        } else if (operacion == 3) {
+            this.Lbl_Title_opc.setText("Eliminar Item: " + Seleccionado);
+        }
+
+    }//GEN-LAST:event_Tb_MainMouseClicked
+
+    private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
+        if(Seleccionado.equals("")){
+            JOptionPane.showMessageDialog(null, "Seleccione un item primero");
+        }
+        else{
+            this.Pnl_1.setVisible(true);
+            this.Lbl_disponibilidad.setVisible(true);
+            this.Lbl_nombre.setVisible(true);
+            this.Txt_1.setVisible(true);
+            this.Rbtn_1.setEnabled(true);
+            this.Rbtn_2.setEnabled(true);
+            this.Btn_aceptar.setEnabled(true);
+            this.Txt_1.setEnabled(true);
+            this.Lbl_Title_opc.setText("Modificar Item: " + Seleccionado);
+            operacion = 2;
+        }
+    }//GEN-LAST:event_Btn_modificarMouseClicked
+
+    private void Btn_EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EliminarMouseClicked
+        if(Seleccionado.equals("")){
+            JOptionPane.showMessageDialog(null, "Seleccione un item primero");
+        }
+        else{
+            this.Pnl_1.setVisible(true);
+            this.Lbl_Title_opc.setText("Eliminar item: " + Seleccionado);
+            this.Lbl_disponibilidad.setVisible(false);
+            this.Lbl_nombre.setVisible(false);
+            this.Txt_1.setVisible(false);
+            this.Rbtn_1.setEnabled(false);
+            this.Rbtn_2.setEnabled(false);
+            operacion = 3;
+            this.Btn_aceptar.setEnabled(true);
+        }
+    }//GEN-LAST:event_Btn_EliminarMouseClicked
+
+    private void Btn_EliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EliminarMouseExited
+
+    }//GEN-LAST:event_Btn_EliminarMouseExited
+
+    private void Btn_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_agregarMouseClicked
+        this.Pnl_1.setVisible(true);
+        this.Lbl_Title_opc.setText("Agregar");
+        this.Lbl_disponibilidad.setVisible(true);
+        this.Lbl_nombre.setVisible(true);
+        this.Txt_1.setVisible(true);
+        this.Rbtn_1.setEnabled(true);
+        this.Rbtn_2.setEnabled(true);
+        this.Txt_1.setEnabled(true);
+        this.Btn_aceptar.setEnabled(true);
+        operacion = 1;
+    }//GEN-LAST:event_Btn_agregarMouseClicked
+
+    private void Btn_filtrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_filtrarMouseClicked
+        this.Pnl_1.setVisible(true);
+        this.Lbl_Title_opc.setText("Escriba el ID del usuario");
+        this.Lbl_disponibilidad.setVisible(true);
+        this.Lbl_nombre.setVisible(true);
+        this.Lbl_disponibilidad.setText("");
+        this.Lbl_nombre.setText("ID:");
+        this.Txt_1.setVisible(true);
+        this.Txt_1.setText(Seleccionado);
+        this.Rbtn_1.setEnabled(false);
+        this.Rbtn_2.setEnabled(false);
+        this.Btn_aceptar.setEnabled(true);
+        this.Txt_1.setEnabled(true);
+        operacion = 4;
+    }//GEN-LAST:event_Btn_filtrarMouseClicked
+
+    private void Txt_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Txt_1ActionPerformed
+
+    private void Btn_aceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_aceptarMouseClicked
+        Connection conexion = null;
+        Conectar conn4 = new Conectar();
+        conexion = conn4.ConexionDB();
+        Statement stmt = null;
+        String select = "";
+        switch(operacion){
+            case 1:
+            if(Rbtn_1.isSelected()){
+                select = "0";
+            }
+            else if(Rbtn_2.isSelected()){
+                select = "1";
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Seleccione su disponibilidad");
+                break;
+            }
+            String queryUser1 = "INSERT INTO `reactivo_table` (Reactivo_Nombre, Reactivo_Disponible, Reactivo_Login_ID_FK) VALUES ('"+ this.Txt_1.getText() +"','"+ select +"','"+ Usuario +"')";
+            try{
+                stmt = conexion.createStatement();
+                stmt.executeUpdate(queryUser1);
+            }
+            catch(SQLException ex) {
+                Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.Txt_1.setText("");
+            Rbtn_group.clearSelection();
+            refrescarTabla();
+            break;
+            case 2:
+            if(Rbtn_1.isSelected()){
+                select = "0";
+            }
+            else if(Rbtn_2.isSelected()){
+                select = "1";
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Seleccione su disponibilidad");
+                break;
+            }
+            String queryUser2 = "UPDATE reactivo_table SET Reactivo_Nombre = '"+ this.Txt_1.getText() +"', Reactivo_Disponible = '"+ select +"' WHERE Reactivo_ID_PK = '"+ Seleccionado +"';";
+            try{
+                stmt = conexion.createStatement();
+                stmt.executeUpdate(queryUser2);
+            }
+            catch(SQLException ex) {
+                Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.Txt_1.setText("");
+            Rbtn_group.clearSelection();
+            refrescarTabla();
+            break;
+            case 3:
+            int confirm1 = JOptionPane.showOptionDialog(null, "Eliminar elemento: " + Seleccionado + "?", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if(confirm1 != 1){
+                String queryUser3 = "DELETE FROM reactivo_table WHERE Reactivo_ID_PK = '"+ Seleccionado +"';";
+                try{
+                    stmt = conexion.createStatement();
+                    stmt.executeUpdate(queryUser3);
+                }
+                catch(SQLException ex) {
+                    Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                refrescarTabla();
+            }
+            break;
+            case 4:
+            DefaultTableModel myModel = (DefaultTableModel) Tb_Main.getModel();
+            int rowCount = Tb_Main.getRowCount();
+            for (int i = rowCount - 1; i >= 0; i--){
+                myModel.removeRow(i);
+            }
+            String [] arreglo = new String[4];
+
+            String queryUser4 = "SELECT Reactivo_ID_PK, Reactivo_Nombre, Reactivo_Disponible, Reactivo_Login_ID_FK FROM reactivo_table Where Reactivo_Login_ID_FK = '"+ this.Txt_1.getText() +"';";
+            try{
+                stmt = conexion.createStatement();
+                ResultSet rs = stmt.executeQuery(queryUser4);
+                String valor = "";
+                while(rs.next()){
+                    arreglo[0] = rs.getString("Reactivo_ID_PK");
+                    arreglo[1] = rs.getString("Reactivo_Nombre");
+                    if (rs.getString("Reactivo_Disponible").equals("0")){
+                        valor = "Disponible";
+                    }
+                    else {
+                        valor = "No Disponible";
+                    }
+                    arreglo[2] = valor;
+                    arreglo[3] = rs.getString("Reactivo_Login_ID_FK");
+                    myModel.addRow(arreglo);
+                }
+            }
+            catch(SQLException ex) {
+                Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            break;
+        }
+    }//GEN-LAST:event_Btn_aceptarMouseClicked
+    public void refrescarTabla(){
+        DefaultTableModel myModel = (DefaultTableModel) Tb_Main.getModel();
+        int rowCount = Tb_Main.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--){
+            myModel.removeRow(i);
+        }
+        Connection conexion = null;
+        Conectar conn = new Conectar();
+        conexion = conn.ConexionDB();
+        String [] arreglo = new String[4];
+        Statement stmt = null;
+        String queryUser = "SELECT Reactivo_ID_PK, Reactivo_Nombre, Reactivo_Disponible, Reactivo_Login_ID_FK FROM reactivo_table;";
+        try{
+            stmt = conexion.createStatement();
+            ResultSet rs = stmt.executeQuery(queryUser);
+            String valor = "";
+            while(rs.next()){
+                arreglo[0] = rs.getString("Reactivo_ID_PK");
+                arreglo[1] = rs.getString("Reactivo_Nombre");
+                if (rs.getString("Reactivo_Disponible").equals("0")){
+                    valor = "Disponible";
+                }
+                else {
+                    valor = "No Disponible";
+                }
+                arreglo[2] = valor;
+                arreglo[3] = rs.getString("Reactivo_Login_ID_FK");
+                myModel.addRow(arreglo);
+            }
+        }
+        catch(SQLException ex) {
+            Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -111,7 +527,22 @@ public class Main_frm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Eliminar;
+    private javax.swing.JButton Btn_aceptar;
+    private javax.swing.JButton Btn_agregar;
+    private javax.swing.JButton Btn_filtrar;
+    private javax.swing.JButton Btn_modificar;
+    private javax.swing.JLabel Lbl_Title_opc;
+    private javax.swing.JLabel Lbl_disponibilidad;
+    private javax.swing.JLabel Lbl_nombre;
+    private javax.swing.JPanel Pnl_1;
+    private javax.swing.JRadioButton Rbtn_1;
+    private javax.swing.JRadioButton Rbtn_2;
+    private javax.swing.JTable Tb_Main;
     private javax.swing.JLabel Title_lbl1;
+    private javax.swing.JTextField Txt_1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
