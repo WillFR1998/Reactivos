@@ -14,6 +14,7 @@ public class Reactivos {
     public static void main(String[] args) {
         Login_frm login = new Login_frm();
         login.setVisible(true);
+        login.setLocationRelativeTo(null);
     }
     
 }
