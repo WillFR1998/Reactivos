@@ -21,6 +21,7 @@ public class Main_frm extends javax.swing.JFrame {
     private String Seleccionado = "";
     private int operacion = 0;
     ButtonGroup Rbtn_group;
+
     public Main_frm() {
         initComponents();
     }
@@ -53,6 +54,7 @@ public class Main_frm extends javax.swing.JFrame {
         Rbtn_2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(805, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -60,6 +62,7 @@ public class Main_frm extends javax.swing.JFrame {
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setPreferredSize(new java.awt.Dimension(769, 550));
 
         Title_lbl1.setText("1");
 
@@ -77,32 +80,6 @@ public class Main_frm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(Tb_Main);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Title_lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(459, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Title_lbl1)
-                .addGap(0, 616, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(67, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
-        );
 
         Btn_modificar.setText("Modificar");
         Btn_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -125,6 +102,11 @@ public class Main_frm extends javax.swing.JFrame {
         Btn_agregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_agregarMouseClicked(evt);
+            }
+        });
+        Btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_agregarActionPerformed(evt);
             }
         });
 
@@ -220,18 +202,18 @@ public class Main_frm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(Title_lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(459, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Btn_agregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Btn_modificar)
@@ -240,21 +222,46 @@ public class Main_frm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Btn_filtrar))
                     .addComponent(Pnl_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(179, 179, 179))
+                .addGap(141, 141, 141))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Title_lbl1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Btn_agregar)
+                    .addComponent(Btn_modificar)
+                    .addComponent(Btn_Eliminar)
+                    .addComponent(Btn_filtrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Pnl_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(29, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(181, 181, 181)))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Btn_agregar)
-                    .addComponent(Btn_modificar)
-                    .addComponent(Btn_Eliminar)
-                    .addComponent(Btn_filtrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Pnl_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -262,7 +269,7 @@ public class Main_frm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-         this.Title_lbl1.setText("Bienvenido: " + Usuario);
+        this.Title_lbl1.setText("Bienvenido: " + Usuario);
         refrescarTabla();
         Rbtn_group = new ButtonGroup();
         Rbtn_group.add(Rbtn_1);
@@ -285,10 +292,9 @@ public class Main_frm extends javax.swing.JFrame {
     }//GEN-LAST:event_Tb_MainMouseClicked
 
     private void Btn_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_modificarMouseClicked
-        if(Seleccionado.equals("")){
+        if (Seleccionado.equals("")) {
             JOptionPane.showMessageDialog(null, "Seleccione un item primero");
-        }
-        else{
+        } else {
             this.Pnl_1.setVisible(true);
             this.Lbl_disponibilidad.setVisible(true);
             this.Lbl_nombre.setVisible(true);
@@ -303,10 +309,9 @@ public class Main_frm extends javax.swing.JFrame {
     }//GEN-LAST:event_Btn_modificarMouseClicked
 
     private void Btn_EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_EliminarMouseClicked
-        if(Seleccionado.equals("")){
+        if (Seleccionado.equals("")) {
             JOptionPane.showMessageDialog(null, "Seleccione un item primero");
-        }
-        else{
+        } else {
             this.Pnl_1.setVisible(true);
             this.Lbl_Title_opc.setText("Eliminar item: " + Seleccionado);
             this.Lbl_disponibilidad.setVisible(false);
@@ -362,135 +367,129 @@ public class Main_frm extends javax.swing.JFrame {
         conexion = conn4.ConexionDB();
         Statement stmt = null;
         String select = "";
-        switch(operacion){
+        switch (operacion) {
             case 1:
-            if(Rbtn_1.isSelected()){
-                select = "0";
-            }
-            else if(Rbtn_2.isSelected()){
-                select = "1";
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Seleccione su disponibilidad");
-                break;
-            }
-            String queryUser1 = "INSERT INTO `reactivo_table` (Reactivo_Nombre, Reactivo_Disponible, Reactivo_Login_ID_FK) VALUES ('"+ this.Txt_1.getText() +"','"+ select +"','"+ Usuario +"')";
-            try{
-                stmt = conexion.createStatement();
-                stmt.executeUpdate(queryUser1);
-            }
-            catch(SQLException ex) {
-                Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.Txt_1.setText("");
-            Rbtn_group.clearSelection();
-            refrescarTabla();
-            break;
-            case 2:
-            if(Rbtn_1.isSelected()){
-                select = "0";
-            }
-            else if(Rbtn_2.isSelected()){
-                select = "1";
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Seleccione su disponibilidad");
-                break;
-            }
-            String queryUser2 = "UPDATE reactivo_table SET Reactivo_Nombre = '"+ this.Txt_1.getText() +"', Reactivo_Disponible = '"+ select +"' WHERE Reactivo_ID_PK = '"+ Seleccionado +"';";
-            try{
-                stmt = conexion.createStatement();
-                stmt.executeUpdate(queryUser2);
-            }
-            catch(SQLException ex) {
-                Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.Txt_1.setText("");
-            Rbtn_group.clearSelection();
-            refrescarTabla();
-            break;
-            case 3:
-            int confirm1 = JOptionPane.showOptionDialog(null, "Eliminar elemento: " + Seleccionado + "?", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-            if(confirm1 != 1){
-                String queryUser3 = "DELETE FROM reactivo_table WHERE Reactivo_ID_PK = '"+ Seleccionado +"';";
-                try{
-                    stmt = conexion.createStatement();
-                    stmt.executeUpdate(queryUser3);
+                if (Rbtn_1.isSelected()) {
+                    select = "0";
+                } else if (Rbtn_2.isSelected()) {
+                    select = "1";
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione su disponibilidad");
+                    break;
                 }
-                catch(SQLException ex) {
+                String queryUser1 = "INSERT INTO `reactivo_table` (Reactivo_Nombre, Reactivo_Disponible, Reactivo_Login_ID_FK) VALUES ('" + this.Txt_1.getText() + "','" + select + "','" + Usuario + "')";
+                try {
+                    stmt = conexion.createStatement();
+                    stmt.executeUpdate(queryUser1);
+                } catch (SQLException ex) {
                     Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                this.Txt_1.setText("");
+                Rbtn_group.clearSelection();
                 refrescarTabla();
-            }
-            break;
-            case 4:
-            DefaultTableModel myModel = (DefaultTableModel) Tb_Main.getModel();
-            int rowCount = Tb_Main.getRowCount();
-            for (int i = rowCount - 1; i >= 0; i--){
-                myModel.removeRow(i);
-            }
-            String [] arreglo = new String[4];
-
-            String queryUser4 = "SELECT Reactivo_ID_PK, Reactivo_Nombre, Reactivo_Disponible, Reactivo_Login_ID_FK FROM reactivo_table Where Reactivo_Login_ID_FK = '"+ this.Txt_1.getText() +"';";
-            try{
-                stmt = conexion.createStatement();
-                ResultSet rs = stmt.executeQuery(queryUser4);
-                String valor = "";
-                while(rs.next()){
-                    arreglo[0] = rs.getString("Reactivo_ID_PK");
-                    arreglo[1] = rs.getString("Reactivo_Nombre");
-                    if (rs.getString("Reactivo_Disponible").equals("0")){
-                        valor = "Disponible";
-                    }
-                    else {
-                        valor = "No Disponible";
-                    }
-                    arreglo[2] = valor;
-                    arreglo[3] = rs.getString("Reactivo_Login_ID_FK");
-                    myModel.addRow(arreglo);
+                break;
+            case 2:
+                if (Rbtn_1.isSelected()) {
+                    select = "0";
+                } else if (Rbtn_2.isSelected()) {
+                    select = "1";
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione su disponibilidad");
+                    break;
                 }
-            }
-            catch(SQLException ex) {
-                Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            break;
+                String queryUser2 = "UPDATE reactivo_table SET Reactivo_Nombre = '" + this.Txt_1.getText() + "', Reactivo_Disponible = '" + select + "' WHERE Reactivo_ID_PK = '" + Seleccionado + "';";
+                try {
+                    stmt = conexion.createStatement();
+                    stmt.executeUpdate(queryUser2);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.Txt_1.setText("");
+                Rbtn_group.clearSelection();
+                refrescarTabla();
+                break;
+            case 3:
+                int confirm1 = JOptionPane.showOptionDialog(null, "Eliminar elemento: " + Seleccionado + "?", "Borrar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                if (confirm1 != 1) {
+                    String queryUser3 = "DELETE FROM reactivo_table WHERE Reactivo_ID_PK = '" + Seleccionado + "';";
+                    try {
+                        stmt = conexion.createStatement();
+                        stmt.executeUpdate(queryUser3);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    refrescarTabla();
+                }
+                break;
+            case 4:
+                DefaultTableModel myModel = (DefaultTableModel) Tb_Main.getModel();
+                int rowCount = Tb_Main.getRowCount();
+                for (int i = rowCount - 1; i >= 0; i--) {
+                    myModel.removeRow(i);
+                }
+                String[] arreglo = new String[4];
+
+                String queryUser4 = "SELECT Reactivo_ID_PK, Reactivo_Nombre, Reactivo_Disponible, Reactivo_Login_ID_FK FROM reactivo_table Where Reactivo_Login_ID_FK = '" + this.Txt_1.getText() + "';";
+                try {
+                    stmt = conexion.createStatement();
+                    ResultSet rs = stmt.executeQuery(queryUser4);
+                    String valor = "";
+                    while (rs.next()) {
+                        arreglo[0] = rs.getString("Reactivo_ID_PK");
+                        arreglo[1] = rs.getString("Reactivo_Nombre");
+                        if (rs.getString("Reactivo_Disponible").equals("0")) {
+                            valor = "Disponible";
+                        } else {
+                            valor = "No Disponible";
+                        }
+                        arreglo[2] = valor;
+                        arreglo[3] = rs.getString("Reactivo_Login_ID_FK");
+                        myModel.addRow(arreglo);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
         }
     }//GEN-LAST:event_Btn_aceptarMouseClicked
-    public void refrescarTabla(){
+
+    private void Btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_agregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_agregarActionPerformed
+    public void refrescarTabla() {
         DefaultTableModel myModel = (DefaultTableModel) Tb_Main.getModel();
         int rowCount = Tb_Main.getRowCount();
-        for (int i = rowCount - 1; i >= 0; i--){
+        for (int i = rowCount - 1; i >= 0; i--) {
             myModel.removeRow(i);
         }
         Connection conexion = null;
         Conectar conn = new Conectar();
         conexion = conn.ConexionDB();
-        String [] arreglo = new String[4];
+        String[] arreglo = new String[4];
         Statement stmt = null;
         String queryUser = "SELECT Reactivo_ID_PK, Reactivo_Nombre, Reactivo_Disponible, Reactivo_Login_ID_FK FROM reactivo_table;";
-        try{
+        try {
             stmt = conexion.createStatement();
             ResultSet rs = stmt.executeQuery(queryUser);
             String valor = "";
-            while(rs.next()){
+            while (rs.next()) {
                 arreglo[0] = rs.getString("Reactivo_ID_PK");
                 arreglo[1] = rs.getString("Reactivo_Nombre");
-                if (rs.getString("Reactivo_Disponible").equals("0")){
+                if (rs.getString("Reactivo_Disponible").equals("0")) {
                     valor = "Disponible";
-                }
-                else {
+                } else {
                     valor = "No Disponible";
                 }
                 arreglo[2] = valor;
                 arreglo[3] = rs.getString("Reactivo_Login_ID_FK");
                 myModel.addRow(arreglo);
             }
-        }
-        catch(SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(Main_frm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
+
     /**
      * @param args the command line arguments
      */
