@@ -21,7 +21,7 @@ public class Conectar {
     public Connection ConexionDB()
     {
         try{
-            Class.forName("com.mysql.jdb.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         }
         catch(ClassNotFoundException ex){
             System.out.println("Error al registrar el driver en MySQL"+ ex);
