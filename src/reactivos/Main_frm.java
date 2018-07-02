@@ -347,7 +347,7 @@ public class Main_frm extends javax.swing.JFrame {
         this.Lbl_disponibilidad.setVisible(true);
         this.Lbl_nombre.setVisible(true);
         this.Lbl_disponibilidad.setText("");
-        this.Lbl_nombre.setText("Usuario:");
+        this.Lbl_nombre.setText("Usuario: ");
         this.Txt_1.setVisible(true);
         this.Txt_1.setText(Seleccionado);
         this.Rbtn_1.setEnabled(false);
